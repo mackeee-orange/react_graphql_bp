@@ -21,17 +21,9 @@ declare global {
     payload?: unknown;
   }
 
-  interface Type<T> extends Object {
-    new (...args: unknown[]): T;
-  }
-
   /**
    * TypeAlias
    * **/
-
-  // Tの中でKで指定したunion型のキーが必須パラメータになる
-  type PartialRequired<T, K extends keyof T> = Partial<T> & Required<Pick<T, K>>;
-
   type ThemeColor =
     | "primary"
     | "secondary"
@@ -44,16 +36,10 @@ declare global {
     | "lightGray"
     | "white";
 
-  type LoginAs = "driver" | "navigator";
-
   type SizeType = "sm" | "md" | "lg";
 
   type Maybe<T> = T | null;
   type Optional<T> = Maybe<T>;
-
-  type PropBool = boolean | "true";
-
-  type Func = (args?: unknown) => unknown | void;
 
   /**
    * GraphQL

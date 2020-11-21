@@ -1,19 +1,24 @@
 import { ApolloClient, ApolloLink, HttpLink, InMemoryCache } from "@apollo/client";
 import { API_HOST_URL } from "commons/constants/url";
+import { setContext } from "@apollo/client/link/context";
 import { onError } from "@apollo/client/link/error";
 import { createFragmentArgumentLink } from "apollo-link-fragment-argument";
-import routes from "commons/constants/routes";
+import signOut from "commons/functions/signOut";
 import PersistenceKeys from "commons/constants/persistenceKeys";
 
 const cache = new InMemoryCache();
 
-function logout(): void {
-  localStorage.setItem(PersistenceKeys.AUTH_TOKEN, "");
-  window.location.href = routes.signIn();
-}
-
 const httpLink = new HttpLink({ uri: `${API_HOST_URL}/graphql` });
 const fragmentLink = createFragmentArgumentLink();
+const authLink = setContext((_, { headers }) => {
+  const token = localStorage.getItem(PersistenceKeys.AUTH_TOKEN);
+  return {
+    headers: {
+      ...headers,
+      Authorization: token ? `Bearer ${token}` : null,
+    },
+  };
+});
 const errorLink = onError(({ graphQLErrors, networkError, operation }) => {
   if (graphQLErrors) {
     graphQLErrors.forEach(({ message, path }) => {
@@ -30,14 +35,14 @@ const errorLink = onError(({ graphQLErrors, networkError, operation }) => {
               Authorization: null,
             },
           });
-          logout();
+          signOut();
       }
     }
   }
 });
 
 const client = new ApolloClient({
-  link: ApolloLink.from([(fragmentLink as unknown) as ApolloLink, errorLink, httpLink]),
+  link: ApolloLink.from([(fragmentLink as unknown) as ApolloLink, errorLink, authLink, httpLink]),
   cache,
 });
 

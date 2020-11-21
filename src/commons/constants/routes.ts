@@ -13,7 +13,7 @@ const routes = {
   /***
    * ログイン後
    * ***/
-  home: (): string => "/home"
+  home: (): string => "/home",
 } as const;
 
 export default routes;

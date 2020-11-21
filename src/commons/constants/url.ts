@@ -13,4 +13,3 @@ export const API_HOST_URL = ((): string => {
       return "http://localhost:4000";
   }
 })();
-
