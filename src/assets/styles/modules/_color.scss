@@ -1,0 +1,78 @@
+$white: #fff;
+$light-gray: #f8f8f8;
+$medium-gray: #b2b2b2;
+$dark-gray: #2b3e3f;
+$black: #1c272b;
+$yellow: #f2d535;
+
+$primary-color: #03b398;
+$secondary-color: #dfebed;
+$danger-color: #ed4663;
+$disabled-color: $medium-gray;
+$content-bg-color: #f0f5f4;
+$line-color: #e4e4e4;
+$default-content-color: $light-gray;
+
+$editor-bg-color: $dark-gray;
+
+$primary-gradient-colors: (
+  first: #03b398,
+  end: #4b8bb2,
+);
+$secondary-gradient-colors: (
+  first: #03b398,
+  middle: #21acb7,
+  end: #4b8bb2,
+);
+
+@mixin bg-gradient($deg: 60deg, $start-color: #fff, $end-color: #000) {
+  background: linear-gradient($deg, $start-color, $end-color);
+}
+
+@mixin primary-gradient($deg: 60deg) {
+  background: linear-gradient($deg, #03b398, #21acb7, #4b67b2);
+}
+
+@mixin secondary-gradient($deg: 60deg) {
+  background: linear-gradient($deg, #f7931e, #d4145a);
+}
+
+.primary {
+  color: $primary-color;
+}
+
+.secondary {
+  color: $secondary-color;
+}
+
+.danger {
+  color: $danger-color;
+}
+
+.disable {
+  color: $disabled-color;
+}
+
+.line {
+  color: $line-color;
+}
+
+.black {
+  color: $black;
+}
+
+.darkGray {
+  color: $dark-gray;
+}
+
+.mediumGray {
+  color: $medium-gray;
+}
+
+.lightGray {
+  color: $light-gray;
+}
+
+.white {
+  color: $white;
+}

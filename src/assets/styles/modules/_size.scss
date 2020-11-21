@@ -1,0 +1,38 @@
+$iphone-size: 375px;
+$opened-sidebar-width: 200px;
+$max-page-content-width: 992px;
+$sidebar-width: 220px;
+
+// パーツのサイズ
+$header-height: 70px;
+
+// 角丸
+$radius-xs: 4px;
+$radius-sm: 8px;
+$radius-md: 16px;
+$radius-lg: 24px;
+$radius-xl: 32px;
+
+// フォントサイズ
+$f-size-xs: 8px;
+$f-size-sm: 10px;
+$f-size-md: 14px;
+$f-size-lg: 21px;
+$f-size-xl: 32px;
+
+// メディアクエリ
+$size-ranks: xs, sm, md, lg, xl;
+
+$breakpoints: (
+  "xs": "screen and (min-width: 400px)",
+  "sm": "screen and (min-width: 567px)",
+  "md": "screen and (min-width: 768px)",
+  "lg": "screen and (min-width: 992px)",
+  "xl": "screen and (min-width: 1200px)",
+) !default;
+
+@mixin mediaQuery($breakpoint: md) {
+  @media #{map-get($breakpoints, $breakpoint)} {
+    @content;
+  }
+}

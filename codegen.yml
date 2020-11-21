@@ -1,0 +1,26 @@
+schema: "mockServer/schema.graphql"
+documents: "src/**/graphql/*.ts"
+generates:
+  src/data/utilities/__generated__/graphql_schema.ts:
+    hooks:
+      afterOneFileWrite:
+        - npm run prettier
+    plugins:
+      - add:
+          content: "/* eslint-disable */"
+      - typescript
+      - typescript-operations
+      - typescript-react-apollo
+    config:
+      reactApolloVersion: 3
+      withComponent: false
+      withHOC: false
+      withHooks: true
+      gqlImport: "@apollo/client#gql"
+      apolloReactCommonImportFrom: "@apollo/client"
+      apolloReactComponentsImportFrom: "@apollo/client"
+      apolloReactHocImportFrom: "@apollo/client"
+      apolloReactHooksImportFrom: "@apollo/client"
+  src/data/utilities/__generated__/fragmentTypes.json:
+    plugins:
+      - fragment-matcher

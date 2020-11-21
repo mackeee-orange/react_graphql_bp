@@ -1,0 +1,68 @@
+type Mutation {
+
+  # Account
+  "Account"
+  updateAccount(input: UpdateAccountInput!): UpdateAccountPayload
+}
+
+type Query {
+
+  # Fetches an object given its ID.
+  """
+  Fetches an object given its ID.
+  """
+  node(id: ID!): Node
+
+  # Account
+  "Account"
+  currentAccount: Account
+}
+
+scalar Date
+
+scalar DateTime
+
+scalar EncodedImage
+
+
+# #なしの16進数カラー(3けたor6ケタ)
+"#なしの16進数カラー(3けたor6ケタ)"
+scalar HexColor
+
+# Node interface for Realy specification
+"Node interface for Realy specification"
+interface Node {
+  id: ID!
+}
+
+# Record provides createdAt, updatedAt
+"Record provides createdAt, updatedAt"
+interface Record {
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+
+# Account schema
+"Account schema"
+type Account implements Node & Record {
+  id: ID!
+  email: String!
+  username: String!
+
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+input UpdateAccountInput {
+  username: String
+}
+
+type UpdateAccountPayload {
+  account: Account
+}
+
+schema {
+  query: Query
+  mutation: Mutation
+}
